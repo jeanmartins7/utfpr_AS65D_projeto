@@ -6,8 +6,11 @@ import CardAcoes from "../components/CardAcoes";
 
 
 
-const AcoesPesquisa = () => {
+const AcoesPesquisa = (props) => {
 
+    const goToNovaColeta = () => {
+        props.navigation.navigate('Coleta') //Colocar nome da tela de nova pesquisa
+      }
 
     return(
         <View style={estilos.fundo} >
@@ -19,7 +22,7 @@ const AcoesPesquisa = () => {
             />
             </TouchableOpacity>
 
-            <TouchableOpacity style={estilos.containerCards}>
+            <TouchableOpacity style={estilos.containerCards} onPress={goToNovaColeta}> 
             <CardAcoes 
             texto="Coletar Dados"
             icone="checklist-rtl"
