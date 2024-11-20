@@ -4,6 +4,7 @@ import Drawer from './src/screens/Drawer';
 import AcoesPesquisa from './src/screens/AcoesPesquisa';
 import Coleta from './src/screens/Coleta';
 import { createStackNavigator } from '@react-navigation/stack';
+import AgradecPesquisa from './src/screens/AgradecPesquisa';
 
 const Stack = createStackNavigator();
 
@@ -14,6 +15,7 @@ const App = () => {
         <Stack.Screen name="Drawer" component={Drawer} />
         <Stack.Screen name="Carnaval" component={AcoesPesquisa} options={{ headerTintColor:'#FFFFFF', headerTitleStyle:{fontFamily:'AveriaLibre-Regular', fontSize: 30},headerShown: true, headerStyle:{backgroundColor:'#2B1D62'} }} />
         <Stack.Screen name="Coleta" component={Coleta} options={{headerShown: false}}/>
+        <Stack.Screen name="AgradecPesquisa" component={AgradecPesquisa} options={{headerShown: false}}/>
       </Stack.Navigator>
     </NavigationContainer>
   )
