@@ -3,11 +3,15 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { useState } from 'react';
 
 import Drawer from './Drawer';
+import Login from '../screens/Login';
+import NovaConta from '../screens/NovaConta';
+import RecuperarSenha from '../screens/RecuperarSenha';
 import NovaPesquisa from '../screens/NovaPesquisa';
 import ModificarPesquisa from '../screens/ModificarPesquisa';
 import AcoesPesquisa from '../screens/AcoesPesquisa';
 import Coleta from '../screens/Coleta';
 import AgradecPesquisa from '../screens/AgradecPesquisa';
+import Relatorio from '../screens/Relatorio';
 import CustomBackButton from '../components/CustomBackButton';
 
 const Stack = createStackNavigator();
@@ -17,7 +21,7 @@ const AppNavigator = () => {
 
   return (
     <Stack.Navigator
-      //initialRouteName="Login"
+      initialRouteName="Login"
       screenOptions={{
         headerStyle: { backgroundColor: '#2B1D62' },
         headerTintColor: '#FFFFFF',
@@ -30,9 +34,25 @@ const AppNavigator = () => {
       }}
     >
       <Stack.Screen 
-        name="Drawer" 
-        component={Drawer} 
+        name="Login" 
+        component={Login} 
         options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="NovaConta"
+        component={NovaConta}
+        options={({ navigation }) => ({
+          title: 'Nova Conta',
+          headerLeft: () => <CustomBackButton navigation={navigation} />,
+        })}
+      />
+      <Stack.Screen
+        name="RecuperarSenha"
+        component={RecuperarSenha}
+        options={({ navigation }) => ({
+          title: 'Recuperação de senha',
+          headerLeft: () => <CustomBackButton navigation={navigation} />,
+        })}
       />
       <Stack.Screen
         name="NovaPesquisa"
@@ -41,6 +61,11 @@ const AppNavigator = () => {
           title: 'Nova pesquisa',
           headerLeft: () => <CustomBackButton navigation={navigation} />,
         })}
+      />
+      <Stack.Screen 
+        name="Drawer" 
+        component={Drawer} 
+        options={{headerShown: false}}
       />
       <Stack.Screen
         name="AcoesPesquisa"
@@ -62,6 +87,14 @@ const AppNavigator = () => {
         name="Coleta"
         component={Coleta}
         options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="Relatorio"
+        component={Relatorio}
+        options={({ navigation }) => ({
+          title: 'Relatório',
+          headerLeft: () => <CustomBackButton navigation={navigation} />,
+        })}
       />
       <Stack.Screen
         name="AgradecPesquisa"

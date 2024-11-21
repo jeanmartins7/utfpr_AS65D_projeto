@@ -29,7 +29,12 @@ const CustomDrawer = (props) => {
                 label="Sair"
                 labelStyle = {{ display: 'flex', color: 'white', fontFamily: 'AveriaLibre-Regular', fontSize: 26 }}
                 icon={() => <Icon name="logout" size={43} color='white'/>}
-                onPress={() => props.navigation.popToTop()}
+                onPress={() => {
+                    props.navigation.getParent().reset({
+                        index: 0, 
+                        routes: [{ name: 'Login' }],
+                      });
+                } }
             />
 
         </DrawerContentScrollView>

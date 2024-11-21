@@ -16,6 +16,10 @@ const AcoesPesquisa = (props) => {
         props.navigation.navigate('Coleta')
       }
 
+    const gotoRelatorio = () => {
+      props.navigation.navigate('Relatorio')
+    }
+
     return(
         <View style={estilos.fundo} >
             <TouchableOpacity style={estilos.containerCards} onPress={goToModificarPesquisa}>
@@ -34,7 +38,7 @@ const AcoesPesquisa = (props) => {
             />
             </TouchableOpacity>
 
-            <TouchableOpacity style={estilos.containerCards}>
+            <TouchableOpacity style={estilos.containerCards} onPress={gotoRelatorio}>
             <CardAcoes 
             texto="Relatório"
             icone="donut-large"
