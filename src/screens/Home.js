@@ -1,18 +1,19 @@
 import React from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
+
+// COMPONENTS
 import Card from '../components/Card';
 import Search from '../components/Search';
-import BotaoNovaPesquisa from '../components/BotãoNovaPesquisa';
-
+import ButtonNovaPesquisa from '../components/ButtonNovaPesquisa';
 
 const Home = (props) => {
 
   const goToNovaPesquisa = () => {
-    props.navigation.navigate('') //Colocar nome da tela de nova pesquisa
+    props.navigation.navigate("NovaPesquisa")
   }
 
   const goToPesquisa = () => {
-    props.navigation.navigate('') //Colocar nome da tela de pesquisa aqui
+    props.navigation.navigate("AcoesPesquisa")
   }
 
   return (
@@ -26,27 +27,24 @@ const Home = (props) => {
             <Card 
             texto="SECOMP 2023"
             data="10/10/2023"
-            icone="devices"
-            corIcone="#7a3d43"
+            imagem={require('../../assets/images/secomp2023.png')}
             />
 
             <Card 
             texto="UBUNTU 2022"
             data="05/06/2022"
-            icone="groups"
-            corIcone="#3b3b3b"
+            imagem={require('../../assets/images/ubuntu2022.png')}
             />
 
             <Card 
             texto="MENINAS CPU"
             data="01/04/2022"
-            icone="girl"
-            corIcone="#f30016"
+            imagem={require('../../assets/images/meninascpu.png')}
             />
           </TouchableOpacity>
         </View>
 
-        <BotaoNovaPesquisa texto="NOVA PESQUISA" funcao={goToNovaPesquisa}/>
+        <ButtonNovaPesquisa texto="NOVA PESQUISA" funcao={goToNovaPesquisa}/>
 
       </View>
     </View>

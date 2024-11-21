@@ -1,14 +1,13 @@
 import React from 'react';
-import { View, Text, StyleSheet} from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import { View, Text, StyleSheet, Image} from 'react-native';
 
 const Card = (props) => {
-  const { texto, data, icone, corIcone} = props;
+  const { texto, data, imagem} = props;
 
   return (
     <View style={estilos.containerCard}>
       <View style={estilos.card}>
-        <Icon name={icone} size={60} color={corIcone}/>
+        <Image source={imagem} style={{width: 60, height: 60}}/>
         <Text style={estilos.textoNome}>{texto}</Text>
         <Text style={estilos.textoData}>{data}</Text>
       </View>
