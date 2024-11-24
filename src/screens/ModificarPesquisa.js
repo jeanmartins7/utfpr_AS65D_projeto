@@ -23,12 +23,12 @@ const ModificarPesquisa = (props) => {
 
   const goToHome = () => {
     if (validateFields(txtName, txtDate, setNameErro, setDateErro, image)) {
-      props.navigation.replace("Home");
+      props.navigation.replace("Drawer");
     }
   };
 
   const Delete = () => {
-    props.navigation.replace("Home")
+    props.navigation.replace("Drawer")
   }
 
   return (
