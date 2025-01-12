@@ -1,34 +1,39 @@
 import React from 'react';
 import { Alert } from 'react-native';
-import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
+import * as ImagePicker from 'expo-image-picker';
 
-const options = {
-  mediaType: 'photo',
-  quality: 1,
+export const pickImage = async (setImage) => {
+  const galleryPermission = await ImagePicker.requestMediaLibraryPermissionsAsync();
+  if (!galleryPermission.granted) {
+    Alert.alert("Permissão negada", "Permita o acesso à galeria para selecionar uma imagem.");
+    return;
+  }
+
+  const result = await ImagePicker.launchImageLibraryAsync({
+    mediaTypes: ImagePicker.MediaTypeOptions.Images,
+    quality: 1,
+  });
+
+  if (!result.canceled) {
+    setImage(result.assets[0]);
+  }
 };
 
-export const pickImage = (setImage) => {
-  launchImageLibrary(options, (response) => {
-    if (response.didCancel) {
-      console.log('Seleção de imagem cancelada');
-    } else if (response.errorCode) {
-      console.error('Erro na galeria:', response.errorMessage);
-    } else if (response.assets && response.assets.length > 0) {
-      setImage(response.assets[0]);
-    }
-  });
-};
+export const takePhoto = async (setImage) => {
+  const cameraPermission = await ImagePicker.requestCameraPermissionsAsync();
+  if (!cameraPermission.granted) {
+    Alert.alert("Permissão negada", "Permita o acesso à câmera para capturar uma imagem.");
+    return;
+  }
 
-export const takePhoto = (setImage) => {
-  launchCamera(options, (response) => {
-    if (response.didCancel) {
-      console.log('Captura de foto cancelada');
-    } else if (response.errorCode) {
-      console.error('Erro na câmera:', response.errorMessage);
-    } else if (response.assets && response.assets.length > 0) {
-      setImage(response.assets[0]);
-    }
+  const result = await ImagePicker.launchCameraAsync({
+    mediaTypes: ImagePicker.MediaTypeOptions.Images,
+    quality: 1,
   });
+
+  if (!result.canceled) {
+    setImage(result.assets[0]);
+  }
 };
 
 export const showOptions = (setImage) => {

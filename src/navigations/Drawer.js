@@ -1,6 +1,6 @@
 import React from 'react';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import { Ionicons } from '@expo/vector-icons';
 
 import CustomDrawer from '../components/CustomDrawer';
 import Home from '../screens/Home';
@@ -23,7 +23,9 @@ const Drawer = () => {
                 name="Pesquisas" 
                 component={Home} 
                 options={{
-                    drawerIcon: () => <Icon name="description" size={43} color= 'white'/>,
+                    drawerIcon: ({ color, size }) => (
+                        <Ionicons name="document-text" size={43} color="white" />
+                    ),
                     drawerActiveBackgroundColor: '#2B1F5C',
                     drawerActiveTintColor: '#FFFFFF'
                 }}

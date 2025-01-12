@@ -2,7 +2,7 @@ import React from 'react';
 import { DrawerContentScrollView, DrawerItem, DrawerItemList } from "@react-navigation/drawer";
 import { View, Text, StyleSheet } from 'react-native';
 import { Divider } from 'react-native-paper';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import { Ionicons } from '@expo/vector-icons';
 
 const CustomDrawer = (props) => {
     return (
@@ -28,7 +28,7 @@ const CustomDrawer = (props) => {
                 contentContainerStyle = {{ justifyContent: 'flex-end' }}
                 label="Sair"
                 labelStyle = {{ display: 'flex', color: 'white', fontFamily: 'AveriaLibre-Regular', fontSize: 26 }}
-                icon={() => <Icon name="logout" size={43} color='white'/>}
+                icon={() => <Ionicons name="log-out-outline" size={43} color="white" />}
                 onPress={() => {
                     props.navigation.getParent().reset({
                         index: 0, 

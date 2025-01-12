@@ -1,3 +1,4 @@
+import { StatusBar } from 'expo-status-bar';
 import { View, Text, KeyboardAvoidingView, Platform, ScrollView } from 'react-native';
 import { Button } from 'react-native-paper';
 import { useState } from 'react';
@@ -56,6 +57,7 @@ const NovaPesquisa = (props) => {
           <Button style={styles.button} labelStyle={styles.buttonText} onPress={goToHome}>
             CADASTRAR
           </Button>
+          <StatusBar style="auto" />
         </View>
       </ScrollView>
     </KeyboardAvoidingView>

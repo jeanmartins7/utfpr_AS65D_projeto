@@ -25,7 +25,7 @@ const AcoesPesquisa = (props) => {
             <TouchableOpacity style={estilos.containerCards} onPress={goToModificarPesquisa}>
             <CardAcoes 
             texto="Modificar"
-            icone="edit-note"
+            icone="create-outline"
             corIcone="#F9F9F9"
             />
             </TouchableOpacity>
@@ -33,7 +33,7 @@ const AcoesPesquisa = (props) => {
             <TouchableOpacity style={estilos.containerCards} onPress={goToNovaColeta}> 
             <CardAcoes 
             texto="Coletar Dados"
-            icone="checklist-rtl"
+            icone="list-outline"
             corIcone="#F9F9F9"
             />
             </TouchableOpacity>
@@ -41,7 +41,7 @@ const AcoesPesquisa = (props) => {
             <TouchableOpacity style={estilos.containerCards} onPress={gotoRelatorio}>
             <CardAcoes 
             texto="Relatório"
-            icone="donut-large"
+            icone="pie-chart-outline"
             corIcone="#F9F9F9"
             />
             </TouchableOpacity>

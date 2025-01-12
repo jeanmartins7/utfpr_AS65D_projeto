@@ -1,13 +1,13 @@
 import React from 'react';
 import { TouchableOpacity, StyleSheet } from 'react-native';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import { Ionicons } from '@expo/vector-icons';
 
 const CustomBackButton = ({ navigation }) => (
   <TouchableOpacity
     style={styles.botao}
     onPress={() => navigation.goBack()}
   >
-    <MaterialIcons name="arrow-back" size={30} color="#573FBA" />
+    <Ionicons name="arrow-back" size={30} color="#573FBA" />
   </TouchableOpacity>
 );
 

@@ -1,3 +1,4 @@
+import { StatusBar } from 'expo-status-bar';
 import { View, Text, Image, KeyboardAvoidingView, Platform, ScrollView } from 'react-native';
 import { Button } from 'react-native-paper';
 import { useState } from 'react';
@@ -71,6 +72,7 @@ const ModificarPesquisa = (props) => {
           />
 
           <DeleteButton onPress={() => setModalVisible(true)} />
+          <StatusBar style="auto" />
         </View>
       </ScrollView>
     </KeyboardAvoidingView>

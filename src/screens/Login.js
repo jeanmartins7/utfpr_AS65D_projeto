@@ -1,7 +1,7 @@
 import { View, Text, KeyboardAvoidingView, Platform, ScrollView, StyleSheet } from 'react-native';
 import { Button } from 'react-native-paper';
 import { useState } from 'react';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 
 // COMPONENTS
 import InputField from '../components/InputField';
@@ -40,7 +40,7 @@ const Login = (props) => {
         <View style={styles.container}>
           <View style={estilos.titulo}>
             <Text style={estilos.texto}>Satisfying.you</Text>
-            <Icon name="sentiment-satisfied-alt" size={62.5} color="white"/>
+            <MaterialIcons name="sentiment-satisfied-alt" size={62.5} color="white" />
           </View>
           <InputField
             label="E-mail"

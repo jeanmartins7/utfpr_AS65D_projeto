@@ -1,7 +1,7 @@
 import React from "react";
 import { View , Text} from "react-native";
 import { StyleSheet } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import { Ionicons } from '@expo/vector-icons';
 import { TouchableOpacity } from "react-native";
 
 const Coleta = (props) =>{
@@ -15,23 +15,23 @@ const Coleta = (props) =>{
             <Text style={estilos.textoNome}>O que você achou do Carnaval 2024?</Text>
         <View style={estilos.containerColetas}>
             <TouchableOpacity style={estilos.containerCards} onPress={goAgradecPesq} >
-                <Icon name="sentiment-very-dissatisfied" size={100} color="#D71616" />
+                <Ionicons name="sad-outline" size={100} color="#D71616" />
                 <Text style={estilos.textoColeta}>Péssimo</Text>
             </TouchableOpacity>
             <TouchableOpacity style={estilos.containerCards} onPress={goAgradecPesq}>
-                <Icon name="sentiment-dissatisfied" size={100} color="#FF360A" />
+                <Ionicons name="sad" size={100} color="#FF360A" />
                 <Text style={estilos.textoColeta}>Ruim</Text>
             </TouchableOpacity>
             <TouchableOpacity style={estilos.containerCards} onPress={goAgradecPesq}>
-                <Icon name="sentiment-neutral" size={100} color="#FFC632" />
+                <Ionicons name="help-circle-outline" size={100} color="#FFC632" />
                 <Text style={estilos.textoColeta}>Neutro</Text>
             </TouchableOpacity>
             <TouchableOpacity style={estilos.containerCards} onPress={goAgradecPesq}>
-                <Icon name="sentiment-satisfied" size={100} color="#37BD6D" />
+                <Ionicons name="happy-outline" size={100} color="#37BD6D" />
                 <Text style={estilos.textoColeta}>Bom</Text>
             </TouchableOpacity>
             <TouchableOpacity style={estilos.containerCards} onPress={goAgradecPesq}>
-                <Icon name="sentiment-very-satisfied" size={100} color="#25BC22" />
+                <Ionicons name="happy" size={100} color="#25BC22" />
                 <Text style={estilos.textoColeta}>Excelente</Text>
             </TouchableOpacity>
 
