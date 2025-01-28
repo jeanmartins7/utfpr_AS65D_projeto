@@ -1,7 +1,10 @@
 import { StatusBar } from 'expo-status-bar';
-import { View, Text, Image, KeyboardAvoidingView, Platform, ScrollView } from 'react-native';
+import { View, Text, KeyboardAvoidingView, Platform, ScrollView } from 'react-native';
 import { Button } from 'react-native-paper';
 import { useState } from 'react';
+import { useSelector } from 'react-redux'
+import { getFirestore,updateDoc, doc, deleteDoc } from 'firebase/firestore'
+import app from '../config/firebase'
 
 // COMPONENTS
 import ImagePicker from '../components/ImagePicker';
@@ -14,22 +17,44 @@ import { validateFields } from '../services/validations';
 import { styles } from '../styles/pesquisaStyles';
 
 const ModificarPesquisa = (props) => {
+  const id = useSelector((state) => state.pesquisa.id)
+  const name = useSelector((state) => state.pesquisa.txtName)
+  const date = useSelector((state) => state.pesquisa.txtDate)
+  const imageUri = useSelector((state) => state.pesquisa.image)
+
   const [modalVisible, setModalVisible] = useState(false);
-  const [txtName, setName] = useState('Carnaval 2024')
-  const [txtDate, setDate] = useState('16/02/2024')
-  const [image, setImage] = useState({ uri: Image.resolveAssetSource(require('../../assets/images/Vector.png')).uri })
+  const [txtName, setName] = useState(name || '');
+  const [txtDate, setDate] = useState(date || '');
+  const [image, setImage] = useState(imageUri || '');
 
   const [nameErro, setNameErro] = useState('')
   const [dateErro, setDateErro] = useState('')
 
+  const db = getFirestore(app)
+
   const goToHome = () => {
     if (validateFields(txtName, txtDate, setNameErro, setDateErro, image)) {
-      props.navigation.replace("Drawer");
+      const pesquisaRef = doc(db, "pesquisas", id)
+
+      updateDoc(pesquisaRef, {
+        txtName: txtName,
+        txtDate: txtDate,
+        image: image
+      }).then(() => {
+        props.navigation.replace("Drawer");
+      }).catch(error => {
+        console.error("Erro ao atualizar a pesquisa:", error);
+      });
     }
   };
 
   const Delete = () => {
-    props.navigation.replace("Drawer")
+    const pesquisaRef = doc(db, "pesquisas", id)
+    deleteDoc(pesquisaRef).then(() => {
+      props.navigation.replace("Drawer");
+    }).catch(error => {
+      console.error("Erro ao deletar a pesquisa:", error);
+    });
   }
 
   return (

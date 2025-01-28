@@ -2,6 +2,9 @@ import { StatusBar } from 'expo-status-bar';
 import { View, Text, KeyboardAvoidingView, Platform, ScrollView } from 'react-native';
 import { Button } from 'react-native-paper';
 import { useState } from 'react';
+import { getFirestore, collection, addDoc } from 'firebase/firestore'
+import app from '../config/firebase'
+import * as Network from 'expo-network'
 
 // COMPONENTS
 import ImagePicker from '../components/ImagePicker';
@@ -19,9 +22,30 @@ const NovaPesquisa = (props) => {
   const [nameErro, setNameErro] = useState('');
   const [dateErro, setDateErro] = useState('');
 
-  const goToHome = () => {
+  const db = getFirestore(app)
+  const pesquisaCollection = collection(db, "pesquisas")
+
+  const goToHome = async () => {
     if (validateFields(txtName, txtDate, setNameErro, setDateErro, image)) {
-      props.navigation.replace("Home");
+      const networkStatus = await Network.getNetworkStateAsync();
+
+      if (!networkStatus.isConnected) {
+        console.log("Sem conexão com a internet.");
+        return;
+      }
+
+      const dbPesquisa = {
+        txtName: txtName,
+        txtDate: txtDate,
+        image: image
+      }
+
+      addDoc(pesquisaCollection, dbPesquisa).then((docRef) => {
+        console.log("Novo documento inserido com sucesso: " + docRef.id)
+        props.navigation.replace("Home");
+      }).catch((err) => {
+        console.log("Erro: " + err)
+      })
     }
   };
 

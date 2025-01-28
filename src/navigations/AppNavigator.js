@@ -3,6 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { useState } from 'react';
 
 import Drawer from './Drawer';
+import Home from '../screens/Home';
 import Login from '../screens/Login';
 import NovaConta from '../screens/NovaConta';
 import RecuperarSenha from '../screens/RecuperarSenha';
@@ -53,6 +54,11 @@ const AppNavigator = () => {
           title: 'Recuperação de senha',
           headerLeft: () => <CustomBackButton navigation={navigation} />,
         })}
+      />
+      <Stack.Screen 
+        name="Home" 
+        component={Home} 
+        options={{headerShown: false}}
       />
       <Stack.Screen
         name="NovaPesquisa"
