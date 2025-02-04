@@ -56,10 +56,12 @@ const Home = (props) => {
 
         <View style={estilos.containerCards}>
           <FlatList
+            horizontal={true}
             data={pesquisas}
             keyExtractor={(item) => item.id}
             renderItem={renderPesquisaCard}
             contentContainerStyle={estilos.listaCards}
+            ItemSeparatorComponent={() => <View style={{ width: 10 }} />}
           />
         </View>
 
