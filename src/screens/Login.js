@@ -2,16 +2,19 @@ import { View, Text, KeyboardAvoidingView, Platform, ScrollView, StyleSheet } fr
 import { Button } from 'react-native-paper';
 import { useState } from 'react';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth_mod } from '../config/firebase';
 
 // COMPONENTS
 import InputField from '../components/InputField';
+import InputPassword from '../components/InputPassword';
 
 import { validateFields } from '../services/validationLogin';
 import { styles } from '../styles/pesquisaStyles';
 
 const Login = (props) => {
-  const [txtEmail, setEmail] = useState('jurandir.pereira@hotmail.com');
-  const [txtSenha, setSenha] = useState('*********');
+  const [txtEmail, setEmail] = useState('');
+  const [txtSenha, setSenha] = useState('');
 
   const [emailErro, setEmailErro] = useState('');
   const [senhaErro, setSenhaErro] = useState('');
@@ -19,7 +22,15 @@ const Login = (props) => {
 
   const goToHome = () => {
     if (validateFields(txtEmail, txtSenha, setEmailErro, setSenhaErro, setErro)) {
-      props.navigation.replace("Drawer");
+      signInWithEmailAndPassword(auth_mod, txtEmail, txtSenha)
+      .then((userLogged) =>{
+          console.log("Usuario autenticado com sucesso: " + JSON.stringify(userLogged))
+          props.navigation.replace("Drawer");
+      })
+      .catch((error) => {
+          console.log("Falha na autenticação:" + JSON.stringify(error))
+          alert("E-mail e/ou senha inválidos");
+      })
     }
   }
 
@@ -50,7 +61,7 @@ const Login = (props) => {
             icon={null}
           />
 
-          <InputField
+          <InputPassword
             label="Senha"
             value={txtSenha}
             onChangeText={setSenha}
