@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet} from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import { Ionicons } from '@expo/vector-icons';
 
 const CardAcoes = (props) => {
   const { texto, icone, corIcone} = props;
@@ -8,7 +8,7 @@ const CardAcoes = (props) => {
   return (
     <View style={estilos.containerCard}>
       <View style={estilos.card}>
-        <Icon name={icone} size={60} color={corIcone}/>
+        <Ionicons name={icone} size={60} color={corIcone} />
         <Text style={estilos.textoNome}>{texto}</Text>
       </View>
     </View>

@@ -1,53 +1,69 @@
-import React from 'react';
-import { StyleSheet, TouchableOpacity, View } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, TouchableOpacity, View, FlatList } from 'react-native';
+import { useDispatch } from 'react-redux'
+import { getFirestore, collection, query, onSnapshot } from 'firebase/firestore'
+import { reducerSetPesquisa } from '../redux/pesquisaSlice'
+import app from '../config/firebase'
+
+// COMPONENTS
 import Card from '../components/Card';
 import Search from '../components/Search';
-import BotaoNovaPesquisa from '../components/BotãoNovaPesquisa';
-
+import ButtonNovaPesquisa from '../components/ButtonNovaPesquisa';
 
 const Home = (props) => {
+  const db = getFirestore(app)
+  const pesquisaCollection = collection(db, "pesquisas")
+
+  const [pesquisas, setPesquisas] = useState([]);
+
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    const q = query(pesquisaCollection)
+
+    const unsubscribe = onSnapshot(q, (snapshot) => {
+      const pesquisasLista = []
+      snapshot.forEach((doc) => {
+        pesquisasLista.push({
+          id: doc.id,
+          ...doc.data()
+        })
+      })
+      setPesquisas(pesquisasLista)
+    })
+  }, [])
 
   const goToNovaPesquisa = () => {
-    props.navigation.navigate('') //Colocar nome da tela de nova pesquisa
+    props.navigation.navigate("NovaPesquisa")
   }
 
-  const goToPesquisa = () => {
-    props.navigation.navigate('Carnaval') //Colocar nome da tela de pesquisa aqui
+  const goToPesquisa = (pesquisa) => {
+    dispatch(reducerSetPesquisa({ id: pesquisa.id, txtName: pesquisa.txtName, txtDate: pesquisa.txtDate, image: pesquisa.image }))
+    props.navigation.navigate("AcoesPesquisa")
   }
+
+  const renderPesquisaCard = ({ item }) => (
+      <TouchableOpacity onPress={() => goToPesquisa(item)} style={estilos.containerCards}>
+        <Card texto={item.txtName} data={item.txtDate} imagem={{ uri: item.image.uri }} />
+      </TouchableOpacity>
+  );
 
   return (
     <View style={estilos.fundo}>
       <View style={estilos.containerPesquisas}>
 
-        <Search/>
+        <Search />
 
         <View style={estilos.containerCards}>
-          <TouchableOpacity onPress={goToPesquisa} style={estilos.containerCards}>
-            <Card 
-            texto="SECOMP 2023"
-            data="10/10/2023"
-            icone="devices"
-            corIcone="#7a3d43"
-            corBackground ="#F9F9F9"
-            />
-
-            <Card 
-            texto="UBUNTU 2022"
-            data="05/06/2022"
-            icone="groups"
-            corIcone="#3b3b3b"
-            />
-
-            <Card 
-            texto="MENINAS CPU"
-            data="01/04/2022"
-            icone="girl"
-            corIcone="#f30016"
-            />
-          </TouchableOpacity>
+          <FlatList
+            data={pesquisas}
+            keyExtractor={(item) => item.id}
+            renderItem={renderPesquisaCard}
+            contentContainerStyle={estilos.listaCards}
+          />
         </View>
 
-        <BotaoNovaPesquisa texto="NOVA PESQUISA" funcao={goToNovaPesquisa}/>
+        <ButtonNovaPesquisa texto="NOVA PESQUISA" funcao={goToNovaPesquisa} />
 
       </View>
     </View>

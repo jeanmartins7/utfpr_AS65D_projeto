@@ -8,16 +8,24 @@ import CardAcoes from "../components/CardAcoes";
 
 const AcoesPesquisa = (props) => {
 
+    const goToModificarPesquisa = () => {
+      props.navigation.navigate('ModificarPesquisa')
+    }
+
     const goToNovaColeta = () => {
-        props.navigation.navigate('Coleta') //Colocar nome da tela de nova pesquisa
+        props.navigation.navigate('Coleta')
       }
+
+    const gotoRelatorio = () => {
+      props.navigation.navigate('Relatorio')
+    }
 
     return(
         <View style={estilos.fundo} >
-            <TouchableOpacity style={estilos.containerCards}>
+            <TouchableOpacity style={estilos.containerCards} onPress={goToModificarPesquisa}>
             <CardAcoes 
             texto="Modificar"
-            icone="edit-note"
+            icone="create-outline"
             corIcone="#F9F9F9"
             />
             </TouchableOpacity>
@@ -25,15 +33,15 @@ const AcoesPesquisa = (props) => {
             <TouchableOpacity style={estilos.containerCards} onPress={goToNovaColeta}> 
             <CardAcoes 
             texto="Coletar Dados"
-            icone="checklist-rtl"
+            icone="list-outline"
             corIcone="#F9F9F9"
             />
             </TouchableOpacity>
 
-            <TouchableOpacity style={estilos.containerCards}>
+            <TouchableOpacity style={estilos.containerCards} onPress={gotoRelatorio}>
             <CardAcoes 
             texto="Relatório"
-            icone="donut-large"
+            icone="pie-chart-outline"
             corIcone="#F9F9F9"
             />
             </TouchableOpacity>

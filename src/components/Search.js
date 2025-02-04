@@ -18,6 +18,8 @@ const Search = () => {
         inputStyle = {{ 
           fontFamily: 'AveriaLibre-Regular',
           fontSize: 14,
+          fontWeight: 400,
+          lineHeight: 23.87,
           minHeight: 0,
           paddingVertical: 0,
           textAlignVertical: 'center'

@@ -5,7 +5,7 @@ import { StyleSheet } from "react-native";
 const AgradecPesquisa = (props) =>{
 
     useEffect(() => { const timer = setTimeout(() => { 
-        props.navigation.navigate('Coleta'); 
+        props.navigation.goBack(); 
     }, 3000); 
     return () => clearTimeout(timer); 
 }, [props]);

@@ -1,24 +1,17 @@
 import React from 'react';
+import { Provider } from 'react-redux'
+import { store } from './src/redux/store'
 import { NavigationContainer } from '@react-navigation/native';
-import Drawer from './src/screens/Drawer';
-import AcoesPesquisa from './src/screens/AcoesPesquisa';
-import Coleta from './src/screens/Coleta';
-import { createStackNavigator } from '@react-navigation/stack';
-import AgradecPesquisa from './src/screens/AgradecPesquisa';
-
-const Stack = createStackNavigator();
+import AppNavigator from './src/navigations/AppNavigator';
 
 const App = () => {
   return (
-    <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="Drawer" component={Drawer} />
-        <Stack.Screen name="Carnaval" component={AcoesPesquisa} options={{ headerTintColor:'#FFFFFF', headerTitleStyle:{fontFamily:'AveriaLibre-Regular', fontSize: 30},headerShown: true, headerStyle:{backgroundColor:'#2B1D62'} }} />
-        <Stack.Screen name="Coleta" component={Coleta} options={{headerShown: false}}/>
-        <Stack.Screen name="AgradecPesquisa" component={AgradecPesquisa} options={{headerShown: false}}/>
-      </Stack.Navigator>
-    </NavigationContainer>
-  )
-}
+    <Provider store={store}>
+      <NavigationContainer>
+        <AppNavigator />
+      </NavigationContainer>
+    </Provider>
+  );
+};
 
 export default App;
