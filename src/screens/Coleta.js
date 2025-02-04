@@ -1,47 +1,60 @@
 import React from "react";
-import { View , Text} from "react-native";
-import { StyleSheet } from 'react-native';
+import { View , Text, StyleSheet, TouchableOpacity} from "react-native";
 import { Ionicons } from '@expo/vector-icons';
-import { TouchableOpacity } from "react-native";
+import { db } from '../config/firebase';
+import { doc, updateDoc, increment } from "firebase/firestore";
+import { useSelector } from "react-redux";
 
-const Coleta = (props) =>{
+const Coleta = (props) => {
 
-    const goAgradecPesq = () => {
-        props.navigation.navigate('AgradecPesquisa')
-      }
+  const id = useSelector((state) => state.pesquisa.id);
+  const nome = useSelector((state) => state.pesquisa.txtName);
 
-    return(
-        <View style={estilos.fundo}>
-            <Text style={estilos.textoNome}>O que você achou do Carnaval 2024?</Text>
-        <View style={estilos.containerColetas}>
-            <TouchableOpacity style={estilos.containerCards} onPress={goAgradecPesq} >
-                <Ionicons name="sad-outline" size={100} color="#D71616" />
-                <Text style={estilos.textoColeta}>Péssimo</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={estilos.containerCards} onPress={goAgradecPesq}>
-                <Ionicons name="sad" size={100} color="#FF360A" />
-                <Text style={estilos.textoColeta}>Ruim</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={estilos.containerCards} onPress={goAgradecPesq}>
-                <Ionicons name="help-circle-outline" size={100} color="#FFC632" />
-                <Text style={estilos.textoColeta}>Neutro</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={estilos.containerCards} onPress={goAgradecPesq}>
-                <Ionicons name="happy-outline" size={100} color="#37BD6D" />
-                <Text style={estilos.textoColeta}>Bom</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={estilos.containerCards} onPress={goAgradecPesq}>
-                <Ionicons name="happy" size={100} color="#25BC22" />
-                <Text style={estilos.textoColeta}>Excelente</Text>
-            </TouchableOpacity>
+  const registrarVoto = async (id, tipo) => {
+    if (!id || !tipo) return;
+  
+    const docRef = doc(db, "pesquisas", id);
+  
+    try {
+      await updateDoc(docRef, {
+        [`coleta.${tipo}`]: increment(1),
+      });
+      console.log(`Voto registrado: ${tipo}`);
+      props.navigation.navigate('AgradecPesquisa')
+    } catch (error) {
+      console.error("Erro ao registrar voto:", error);
+    }
+  };
 
-        </View>
-
-        </View>
-    )
-
-
+  return(
+    <View style={estilos.fundo}>
+      <Text style={estilos.textoNome}>O que você achou do {nome}?</Text>
+      <View style={estilos.containerColetas}>
+        <TouchableOpacity style={estilos.containerCards} onPress={() => registrarVoto(id, "pessimo")}>
+          <Ionicons name="sad-outline" size={100} color="#D71616" />
+            <Text style={estilos.textoColeta}>Péssimo</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={estilos.containerCards} onPress={() => registrarVoto(id, "ruim")}>
+          <Ionicons name="sad" size={100} color="#FF360A" />
+          <Text style={estilos.textoColeta}>Ruim</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={estilos.containerCards} onPress={() => registrarVoto(id, "neutro")}>
+          <Ionicons name="help-circle-outline" size={100} color="#FFC632" />
+          <Text style={estilos.textoColeta}>Neutro</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={estilos.containerCards} onPress={() => registrarVoto(id, "bom")}>
+          <Ionicons name="happy-outline" size={100} color="#37BD6D" />
+          <Text style={estilos.textoColeta}>Bom</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={estilos.containerCards} onPress={() => registrarVoto(id, "excelente")}>
+          <Ionicons name="happy" size={100} color="#25BC22" />
+          <Text style={estilos.textoColeta}>Excelente</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
+  )
 }
+
 const estilos = StyleSheet.create({
     fundo: {
       display: 'flex',
