@@ -1,6 +1,6 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import { useState } from 'react';
+import { useSelector } from 'react-redux';
 
 import Drawer from './Drawer';
 import Home from '../screens/Home';
@@ -18,7 +18,7 @@ import CustomBackButton from '../components/CustomBackButton';
 const Stack = createStackNavigator();
 
 const AppNavigator = () => {
-  const [txtName, setName] = useState('Carnaval')
+  const nome = useSelector((state) => state.pesquisa.txtName);
 
   return (
     <Stack.Navigator
@@ -77,7 +77,7 @@ const AppNavigator = () => {
         name="AcoesPesquisa"
         component={AcoesPesquisa}
         options={({ navigation }) => ({
-          title: txtName,
+          title: nome,
           headerLeft: () => <CustomBackButton navigation={navigation} />,
         })}
       />
