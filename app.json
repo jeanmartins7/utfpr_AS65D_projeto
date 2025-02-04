@@ -3,7 +3,7 @@
     "name": "utfpr_AS65D_projeto_expo",
     "slug": "utfpr_AS65D_projeto_expo",
     "version": "1.0.0",
-    "orientation": "portrait",
+    "orientation": "landscape",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
