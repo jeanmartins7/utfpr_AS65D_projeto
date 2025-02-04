@@ -37,7 +37,14 @@ const NovaPesquisa = (props) => {
       const dbPesquisa = {
         txtName: txtName,
         txtDate: txtDate,
-        image: image
+        image: image,
+        coleta: {
+          excelente: 0,
+          bom: 0,
+          neutro: 0,
+          ruim: 0,
+          pessimo: 0
+        }
       }
 
       addDoc(pesquisaCollection, dbPesquisa).then((docRef) => {
